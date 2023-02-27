@@ -23,7 +23,7 @@ const sentence1 = text?.text?.slice(indexMeaning +11,indexSentence1)
 const sentence2 = text?.text?.slice(indexSentence1,indexSentence2)
 const sentence3 = text?.text?.slice(indexSentence2)
   return (
-    <div className='bg-gradient-to-l from-cyan-400 to-indigo-600 h-[100%] p-5 flex flex-col items-center justify-center md:flex-row '>
+    <div className='bg-gradient-to-l from-cyan-400 to-indigo-600 min-h-screen p-5 flex flex-col items-center justify-center md:flex-row '>
      <div>
         <img className='h-72 w-72'src={logo}></img>
       </div>
