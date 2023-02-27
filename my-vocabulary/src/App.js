@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import logo from '../src/images/logowordup.png'
+import logoGif from '../src/images/logoturning.gif'
 
 function App() {
  
@@ -12,6 +13,11 @@ useEffect(()=>{
   .catch((err)=> console.log(err))
 },[])
 
+while(!text.text){
+  return (
+    <img src={logoGif}/>
+  )
+}
 const indexWord = text?.text?.indexOf('Meaning')
 const indexMeaning = text?.text?.indexOf('Sentence')
 const indexSentence1 = text?.text?.indexOf('2')
