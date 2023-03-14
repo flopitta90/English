@@ -8,7 +8,7 @@ const model = 'text-davinci-003';
 // Function to generate the prompt for the OpenAI API 
 // In the future, it will be moved to a helper class in the next code review
 const generatePrompt = () => {
-    return 'Write a random english word, with the meaning and 3 sentences as example using the word, following the same structure everyday Word: [word] Meaning: [meaning] Sentences: 1:[sentence1] 2:[sentence2] 3:[sentence3]'
+    return 'Write a random english word, with the meaning and 3 sentences as example using the word, following this structure Word: [word] Meaning: [meaning] Sentences: 1:[sentence1] 2:[sentence2] 3:[sentence3]'
 };
 // Use the generateText method to generate text from the OpenAI API and passing the generated prompt, the model and max token value
 export const reqOpenAi = async() => {
