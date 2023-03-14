@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import logo from '../src/images/logowordup.png'
 import logoGif from '../src/images/logoturning.gif'
+import {FacebookShareButton,LinkedinShareButton,TwitterShareButton,WhatsappShareButton} from 'react-share'
 
 function App() {
  
