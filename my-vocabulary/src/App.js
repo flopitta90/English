@@ -20,13 +20,13 @@ while(!text.text){
   )
 }
 const indexWord = text?.text?.indexOf('Meaning')
-const indexMeaning = text?.text?.indexOf('Sentence')
+const indexMeaning = text?.text?.indexOf('1')
 const indexSentence1 = text?.text?.indexOf('2')
 const indexSentence2 = text?.text?.indexOf('3')
 
 const word = text?.text?.slice(7,indexWord)
 const meaning = text?.text?.slice(indexWord,indexMeaning)
-const sentence1 = text?.text?.slice(indexMeaning +11,indexSentence1)
+const sentence1 = text?.text?.slice(indexMeaning,indexSentence1)
 const sentence2 = text?.text?.slice(indexSentence1,indexSentence2)
 const sentence3 = text?.text?.slice(indexSentence2)
   return (
