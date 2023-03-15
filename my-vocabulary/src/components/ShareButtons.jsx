@@ -2,7 +2,7 @@ import {FacebookShareButton,LinkedinShareButton,TwitterShareButton,WhatsappShare
 
 export const ShareButtons = () => {
   return (
-    <div className='m-3 w-56 flex justify-around md:flex-col md:h-56 md: w-auto '>
+    <div className='m-3 w-56 flex justify-around md:flex-col md:h-56 md:w-auto '>
     <FacebookShareButton url='http://wordup-ai.vercel.app' quote="I didn't have a clue about this one" hashtag='#learning'>
     <FacebookIcon borderRadius={20} size="50"/>
     </FacebookShareButton>
