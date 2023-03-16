@@ -12,7 +12,7 @@ export const WordCard = () => {
   
   while(!text.text){
     return (
-      <div className='bg-black min-h-screen'>
+      <div className='bg-black w-1/2 min-h-56'>
         <img src={logoGif}/>
       </div>
     )
