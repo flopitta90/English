@@ -1,17 +1,19 @@
-import logo from '../src/images/logowordup.png'
-import { ShareButtons } from './components/ShareButtons';
-import { WordCard } from './components/WordCard';
-
+import {Routes, Route, useLocation} from 'react-router-dom'
+import { SignUp } from './components/SignUp';
+import { SignIn } from './components/SignIn';
+import { Home } from './components/Home';
+import { Logout } from './components/Logout';
 function App() {
- 
+  const location = useLocation()
   return (
-      <div className='bg-gradient-to-l from-cyan-400 to-indigo-600 min-h-screen p-5 flex flex-col items-center justify-center md:flex-row '>
-       <div>
-          <img className='h-72 w-72'src={logo}></img>
-        </div>
-       <WordCard/>
-       <ShareButtons/>
-      </div>
+    <div className='bg-gradient-to-l from-cyan-400 to-indigo-600 min-h-screen flex flex-col-reverse md:flex-col'>
+       {location.pathname === '/' ? <SignIn/> : null}
+   <Routes>
+    <Route path='/' element={<Home/>}/>
+    <Route path='/signup' element={<SignUp/>}/>
+    <Route path='/login' element={<Logout/>}/>
+   </Routes>  
+    </div>
   );
 }
 
