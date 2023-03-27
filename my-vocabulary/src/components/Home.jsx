@@ -2,7 +2,7 @@ import logo from '../images/logowordup.png'
 import { WordCard } from './WordCard'
 import { ShareButtons } from './ShareButtons'
 
-export const Home = ( ) => {
+export const Home = () => {
   return (
     <div className='min-h-screen p-5 flex flex-col items-center justify-center md:flex-row '>
     <div>
