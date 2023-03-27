@@ -29,10 +29,10 @@ export const WordCard = () => {
   const sentence2 = text?.text?.slice(indexSentence1,indexSentence2)
   const sentence3 = text?.text?.slice(indexSentence2)
   return (
-    <div className='bg-[#f1f1f1] rounded-xl p-10 shadow-md w-[95%] md:w-[50%]'>
+    <div className='bg-[#f1f1f1] rounded-xl p-10 drop-shadow-xl w-[95%] md:w-[50%]'>
     <h4 className='text-2xl font-bold flex align-center justify-center align-center'>{word}</h4>
     <h4 className='text-2xl font-light flex align-center justify-center'>{meaning}</h4>
-    <h4 className='text-2xl font-light flex align-center justify-center'>Examples:</h4>
+    <h4 className='text-2xl font-light flex align-center justify-center'>Examples</h4>
     <h4 className='text-xl font-light'>{sentence1}</h4>
     <h4 className='text-xl font-light'>{sentence2}</h4>
     <h4 className='text-xl font-light'>{sentence3}</h4>
