@@ -1,10 +1,9 @@
-const { Router } = require('express');
-const authRouter = require('./authRouter')
-const wordRouter = require('./wordRouter')
+import { Router } from 'express';
+import * as authRouter from './authRouter'
+import * as wordRouter from './wordRouter'
 
-const router = Router();
+export const router = Router();
 
 router.use('/word', wordRouter)
 router.use('/user', authRouter)
 
-module.exports = router;

@@ -1,10 +1,11 @@
-const { Router } = require('express');
-const { reqOpenAi } = require('../index');
-const {createNewWord} = require('../controller/wordController');
-const { Word } = require('../model/words');
+import { Router } from 'express';
+import { reqOpenAi } from '../index';
+import {Word} from '../model/words';
+import {createNewWord} from '../controller/wordController'
 
 
-const router = Router()
+
+export const router = Router()
 
 router.get('/', async(req,res)=> {
   try {
@@ -21,4 +22,3 @@ router.get('/', async(req,res)=> {
   }
 })
 
-module.exports = router

@@ -1,7 +1,7 @@
 import express from 'express'
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
-import routes from './src/routes/indexRoutes.js'
+import { router }from './src/routes/indexRoutes.js'
 dotenv.config();
 const port = process.env.PORT
 const app = express()
@@ -17,7 +17,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/', routes)
+app.use('/', router)
 
 app.listen(port, ()=>{
  console.log(`listening on port: ${port}`)

@@ -1,7 +1,7 @@
-const { Router } = require('express');
-const { createNewUser } = require('../controller/userController');
+import {Router} from 'express'
+import {createNewUser} from '../controller/userController'
 
-const router = Router()
+export const router = Router()
 
 router.get('/', async (req,res)=> {
   try {
@@ -12,4 +12,3 @@ router.get('/', async (req,res)=> {
   }
 })
 
-module.exports = router
