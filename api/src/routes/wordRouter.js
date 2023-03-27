@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { reqOpenAi } from '../index';
-import {Word} from '../model/words';
-import {createNewWord} from '../controller/wordController'
+import { Word } from '../model/words';
+import { createNewWord } from '../controller/wordController'
 
 
 
