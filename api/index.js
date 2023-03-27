@@ -1,7 +1,9 @@
 import express from 'express'
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
-import { router } from './src/routes/indexRoutes.js'
+import { Word } from './src/model/words.js';
+import { createNewWord } from './src/controller/wordController.js';
+import { reqOpenAi } from './src/index.js';
 dotenv.config();
 const port = process.env.PORT
 const app = express()
@@ -17,7 +19,20 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/', router)
+app.get('/', async(req,res)=> {
+  try {
+    const date = new Date().toDateString()
+    const result = await Word.find({date})
+    if(!result.length){
+      const text =await reqOpenAi()
+      const result = await createNewWord(text,date)
+      return res.status(200).send(result)
+    }
+    res.status(200).send(result)
+  } catch (error) {
+    res.status(400).send(error.message)
+  }
+})
 
 app.listen(port, ()=>{
  console.log(`listening on port: ${port}`)
