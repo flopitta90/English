@@ -1,7 +1,7 @@
 import express from 'express'
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
-import routes from './src/routes/indexRoutes'
+import routes from './src/routes/indexRoutes.js'
 dotenv.config();
 const port = process.env.PORT
 const app = express()
