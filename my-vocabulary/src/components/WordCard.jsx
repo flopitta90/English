@@ -4,7 +4,7 @@ export const WordCard = () => {
   const [text, setText] = useState({})
 
   useEffect(()=>{
-    fetch('https://english-joaz.onrender.com/')
+    fetch('https://english-joaz.onrender.com/word')
     .then((response)=>response.json())
     .then((data)=> setText(data[0]))
     .catch((err)=> console.log(err))

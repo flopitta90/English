@@ -1,18 +1,16 @@
-import { Router } from 'express';
-import { reqOpenAi } from '../index';
-import { Word } from '../model/words';
-import { createNewWord } from '../controller/wordController'
+import express from 'express';
+import { Word } from '../model/words.js';
+import { createNewWord } from '../controller/wordController.js';
+import { reqOpenAi } from '../index.js';
 
+const wordRouter = express.Router();
 
-
-export const router = Router()
-
-router.get('/', async(req,res)=> {
+wordRouter.get('/', async(req, res) => {
   try {
     const date = new Date().toDateString()
     const result = await Word.find({date})
     if(!result.length){
-      const text = await reqOpenAi()
+      const text =await reqOpenAi()
       const result = await createNewWord(text,date)
       return res.status(200).send(result)
     }
@@ -20,5 +18,6 @@ router.get('/', async(req,res)=> {
   } catch (error) {
     res.status(400).send(error.message)
   }
-})
+});
 
+export default wordRouter;
