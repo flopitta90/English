@@ -13,7 +13,17 @@ export const SignUp=()=>{
 
   onAuthStateChanged(auth, (currentUser) => {
     setUser(currentUser)
+    const userforDb = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({email: currentUser.email})
+  };
+    const userInDB = fetch('https://english-joaz.onrender.com/user', userforDb)
+    .then((response)=>response.json())
+    .then((data)=> console.log(data))
+    .catch((err)=> console.log(err))
   })
+
 
  if(user){
       navigate('/')
@@ -28,7 +38,6 @@ export const SignUp=()=>{
     // creating a new user
     try {
       const user = await createUserWithEmailAndPassword(auth, email, password)
-      
     } catch (err) {
       if (err.code === AuthErrorCodes.WEAK_PASSWORD) {
       setError("The password is too weak.");
