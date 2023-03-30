@@ -16,7 +16,7 @@ export const SignUp=()=>{
     const userforDb = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({email: currentUser.email})
+      body: JSON.stringify(currentUser)
   };
     const userInDB = fetch('https://english-joaz.onrender.com/user', userforDb)
     .then((response)=>response.json())

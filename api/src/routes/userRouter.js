@@ -15,6 +15,7 @@ userRouter.get('/', async(req, res) => {
 
 userRouter.post('/', async(req, res)=>{
   try {
+    console.log(req.body)
     const email = req.body.email
     const newUser = await createNewUser(email)
     res.status(200).send(newUser)
