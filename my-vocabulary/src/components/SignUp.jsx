@@ -4,7 +4,7 @@ import { AuthErrorCodes, createUserWithEmailAndPassword,onAuthStateChanged } fro
 import { auth } from "../firebase";
 import { signInGoogle } from "../firebase";
 
-export const SignUp=()=>{
+export const SignUp=({globalState})=>{
   const [input, setInput] = useState({ email: "", password: "" });
   const [error, setError] = useState(null);
 

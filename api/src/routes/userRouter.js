@@ -15,7 +15,6 @@ userRouter.get('/', async(req, res) => {
 
 userRouter.post('/', async(req, res)=>{
   try {
-    console.log(req.body)
     const email = req.body.email
     const newUser = await createNewUser(email)
     res.status(200).send(newUser)
@@ -26,7 +25,8 @@ userRouter.post('/', async(req, res)=>{
 
 userRouter.put('/', async(req,res)=>{
   try {
-    const{email, word} = req.body.email
+    const word = new Date().toDateString()
+    const{email} = req.body
     const addedWord = await updateUser(email, word)
     res.status(200).send(addedWord)
   } catch (error) {
