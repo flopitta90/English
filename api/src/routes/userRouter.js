@@ -16,8 +16,12 @@ userRouter.get('/', async(req, res) => {
 userRouter.post('/', async(req, res)=>{
   try {
     const email = req.body.email
-    const newUser = await createNewUser(email)
-    res.status(200).send(newUser)
+    const user = await User.find({email})
+    if(!user){
+      const newUser = await createNewUser(email)
+      return res.status(200).send(newUser)
+    }
+    res.status(200).send(user)
   } catch (error) {
     res.status(400).send(error.message)
   }
