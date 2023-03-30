@@ -3,31 +3,15 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthErrorCodes, createUserWithEmailAndPassword,onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebase";
 import { signInGoogle } from "../firebase";
+import { useUserAuth } from "../context/authUserContext";
 
-export const SignUp=({globalState})=>{
+export const SignUp=()=>{
   const [input, setInput] = useState({ email: "", password: "" });
   const [error, setError] = useState(null);
-
-  const[user, setUser] = useState({})
+  const { signUp, googleSignIn } = useUserAuth()
   const navigate = useNavigate()
 
-  onAuthStateChanged(auth, (currentUser) => {
-    setUser(currentUser)
-    const userforDb = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(currentUser)
-  };
-    const userInDB = fetch('https://english-joaz.onrender.com/user', userforDb)
-    .then((response)=>response.json())
-    .then((data)=> console.log(data))
-    .catch((err)=> console.log(err))
-  })
 
-
- if(user){
-      navigate('/')
-    }
 // handle form submit
   const handleSubmit = async(e) => {
     e.preventDefault();
@@ -37,7 +21,8 @@ export const SignUp=({globalState})=>{
 
     // creating a new user
     try {
-      const user = await createUserWithEmailAndPassword(auth, email, password)
+        await signUp(email, password);
+        navigate("/");
     } catch (err) {
       if (err.code === AuthErrorCodes.WEAK_PASSWORD) {
       setError("The password is too weak.");
@@ -60,13 +45,23 @@ export const SignUp=({globalState})=>{
     }));
   };
 
+  const handleGoogleSignIn = async (e) => {
+    e.preventDefault();
+    try {
+      await googleSignIn();
+      navigate('/');
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   return (
     <div className='bg-gradient-to-l from-cyan-400 to-indigo-600 min-h-screen p-5 flex flex-col items-center justify-center md:flex-row'>
       <div className='bg-[#f1f1f1] rounded-xl py-10 drop-shadow-xl w-[95%] md:w-[50%] text-center'>
       <form autoComplete="off" className="text-center" onSubmit={handleSubmit}>
         <div className="p-1 bg-[#ffffff] mx-auto rounded-md w-[50%] flex justify-center hover:shadow-xl shadow-indigo-500/40 ">
           <img className='m-2' src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj48cGF0aCBkPSJNMTcuNiA5LjJsLS4xLTEuOEg5djMuNGg0LjhDMTMuNiAxMiAxMyAxMyAxMiAxMy42djIuMmgzYTguOCA4LjggMCAwIDAgMi42LTYuNnoiIGZpbGw9IiM0Mjg1RjQiIGZpbGwtcnVsZT0ibm9uemVybyIvPjxwYXRoIGQ9Ik05IDE4YzIuNCAwIDQuNS0uOCA2LTIuMmwtMy0yLjJhNS40IDUuNCAwIDAgMS04LTIuOUgxVjEzYTkgOSAwIDAgMCA4IDV6IiBmaWxsPSIjMzRBODUzIiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNNCAxMC43YTUuNCA1LjQgMCAwIDEgMC0zLjRWNUgxYTkgOSAwIDAgMCAwIDhsMy0yLjN6IiBmaWxsPSIjRkJCQzA1IiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNOSAzLjZjMS4zIDAgMi41LjQgMy40IDEuM0wxNSAyLjNBOSA5IDAgMCAwIDEgNWwzIDIuNGE1LjQgNS40IDAgMCAxIDUtMy43eiIgZmlsbD0iI0VBNDMzNSIgZmlsbC1ydWxlPSJub256ZXJvIi8+PHBhdGggZD0iTTAgMGgxOHYxOEgweiIvPjwvZz48L3N2Zz4='></img>
-          <button className='' onClick={signInGoogle}> Sign up with Google</button>
+          <button className='' onClick={handleGoogleSignIn}> Sign up with Google</button>
         </div>
         <p className="font-extralight">or</p>
         <h1 className="font-bold">Sign Up</h1>

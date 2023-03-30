@@ -1,16 +1,13 @@
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import { useNavigate } from 'react-router-dom'
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../firebase";
+import { useUserAuth } from '../context/authUserContext.js';
 
 
 export const SignIn = () => {
-
-  const[user, setUser] = useState({})
-
-  onAuthStateChanged(auth, (currentUser) => {
-    setUser(currentUser)
-  }) 
+  const { logOut, user } = useUserAuth()
+ 
 
   const navigate = useNavigate()
   const handleLogIn = () => {
@@ -22,14 +19,18 @@ export const SignIn = () => {
   }
 
   
-  const logOut = async () => {
-    await signOut(auth)
-  }
+  const handleLogout = async () => {
+    try {
+      await logOut();
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
   return (
-      user ?
+      user?
       <div className='flex p-3 justify-evenly md:justify-end'>
-        <button className='p-1 bg-[#f1f1f1] rounded-md w-28 shadow-md' onClick={logOut}>Log out</button> 
+        <button className='p-1 bg-[#f1f1f1] rounded-md w-28 shadow-md' onClick={handleLogout}>Log out</button> 
       </div>
       : <div className='flex p-3 space-x-2 justify-evenly md:justify-end'>
       <button className='p-1 bg-[#f1f1f1] rounded-md w-28 hover:shadow-xl shadow-indigo-500/40' onClick={handleLogIn}>Log in</button>

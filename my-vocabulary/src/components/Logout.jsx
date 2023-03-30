@@ -1,26 +1,15 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {  AuthErrorCodes, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
-import { auth } from '../firebase';
-import { signInGoogle } from "../firebase";
+import { useUserAuth } from "../context/authUserContext";
 
 export const Logout=()=> {
   const [input, setInput] = useState({ email: "", password: "" });
   const [error, setError] = useState(null);
-
+  const { logIn, googleSignIn, user} = useUserAuth()
   // initialised auth instance
   
   const navigate = useNavigate()
-  const[user, setUser] = useState({})
-
-  onAuthStateChanged(auth, (currentUser) => {
-    setUser(currentUser)
-  }) 
-
-  if(user){
-    navigate('/')
-  }
-
 // handle form submit
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,7 +19,8 @@ export const Logout=()=> {
 
     // sign in user
     try {
-      const user =  await signInWithEmailAndPassword(auth, email, password)
+      await logIn(email, password)
+      navigate('/')
     } catch (err) {
       if (
         err.code === AuthErrorCodes.INVALID_PASSWORD ||
@@ -42,7 +32,16 @@ export const Logout=()=> {
         alert(err.code);
       }
     }
-  
+  };
+
+  const handleGoogleSignIn = async (e) => {
+    e.preventDefault();
+    try {
+      await googleSignIn();
+      navigate('/')
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   const handleChange = (e) => {
@@ -58,7 +57,7 @@ export const Logout=()=> {
       <form autoComplete="off" onSubmit={handleSubmit}>
       <div className="p-1 bg-[#ffffff] mx-auto rounded-md w-[50%] flex justify-center hover:shadow-xl shadow-indigo-500/40 ">
         <img className='m-2' src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj48cGF0aCBkPSJNMTcuNiA5LjJsLS4xLTEuOEg5djMuNGg0LjhDMTMuNiAxMiAxMyAxMyAxMiAxMy42djIuMmgzYTguOCA4LjggMCAwIDAgMi42LTYuNnoiIGZpbGw9IiM0Mjg1RjQiIGZpbGwtcnVsZT0ibm9uemVybyIvPjxwYXRoIGQ9Ik05IDE4YzIuNCAwIDQuNS0uOCA2LTIuMmwtMy0yLjJhNS40IDUuNCAwIDAgMS04LTIuOUgxVjEzYTkgOSAwIDAgMCA4IDV6IiBmaWxsPSIjMzRBODUzIiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNNCAxMC43YTUuNCA1LjQgMCAwIDEgMC0zLjRWNUgxYTkgOSAwIDAgMCAwIDhsMy0yLjN6IiBmaWxsPSIjRkJCQzA1IiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNOSAzLjZjMS4zIDAgMi41LjQgMy40IDEuM0wxNSAyLjNBOSA5IDAgMCAwIDEgNWwzIDIuNGE1LjQgNS40IDAgMCAxIDUtMy43eiIgZmlsbD0iI0VBNDMzNSIgZmlsbC1ydWxlPSJub256ZXJvIi8+PHBhdGggZD0iTTAgMGgxOHYxOEgweiIvPjwvZz48L3N2Zz4='></img>
-      <button className='' onClick={signInGoogle}> Login with Google</button>
+      <button className='' onClick={handleGoogleSignIn}> Login with Google</button>
       </div>
 
       <p className="font-extralight">or</p>
