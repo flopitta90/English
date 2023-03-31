@@ -52,6 +52,7 @@ export function UserAuthContextProvider({ children }) {
     } else setUserInDB({})
   },[user])
 
+
   return (
     <userAuthContext.Provider
       value={{ user, logIn, signUp, logOut, googleSignIn }}

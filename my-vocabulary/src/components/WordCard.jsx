@@ -33,7 +33,7 @@ export const WordCard = () => {
       };
       fetch('https://english-joaz.onrender.com/user', userforUpdate)
       .then((response)=>response.json())
-      .then((data)=> console.log(data))
+      .then((data)=> alert('saved!'))
       .catch((err)=> alert(err))
       
     }
@@ -58,7 +58,7 @@ export const WordCard = () => {
     <h4 className='text-xl font-light'>{sentence1}</h4>
     <h4 className='text-xl font-light'>{sentence2}</h4>
     <h4 className='text-xl font-light'>{sentence3}</h4>
-    <div className="bg-[#fa2f72] text-white font-bold w-36 py-3 rounded-md text-center mx-auto text-[#0c0c0c] hover:shadow-xl shadow-indigo-500/40">
+    <div className="bg-[#fa2f72] text-white font-bold w-36 py-3 mt-3 rounded-md text-center mx-auto text-[#0c0c0c] hover:shadow-xl shadow-indigo-500/40">
     <button className='bg-'onClick={handleSave}>Save word</button>
     </div>
  </div>
