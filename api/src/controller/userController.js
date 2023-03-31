@@ -18,7 +18,7 @@ export const createNewUser = async (email) => {
  try {
   const queryConditions = { email };
   const wordsUpdated = {$addToSet: {words : [word]}}
-  const updatedUser = await UserModel.updateOne(queryConditions, wordsUpdated, {
+  const updatedUser = await User.updateOne(queryConditions, wordsUpdated, {
     upsert: true,
   });
   return updatedUser;

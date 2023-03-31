@@ -51,7 +51,7 @@ export function UserAuthContextProvider({ children }) {
       .catch((err)=> console.log(err))
     } else setUserInDB({})
   },[user])
-  console.log(userInDB)
+
   return (
     <userAuthContext.Provider
       value={{ user, logIn, signUp, logOut, googleSignIn }}

@@ -1,7 +1,12 @@
 import { useEffect, useState } from 'react';
 import logoGif from '../images/logoturning.gif'
+import {useUserAuth} from '../context/authUserContext.js';
+import { useNavigate} from 'react-router-dom';
+
 export const WordCard = () => {
   const [text, setText] = useState({})
+  const navigate = useNavigate()
+  const {user} = useUserAuth()
 
   useEffect(()=>{
     fetch('https://english-joaz.onrender.com/word')
@@ -17,9 +22,22 @@ export const WordCard = () => {
       </div>
     )
   }
+  
 
   const handleSave = () =>{
-    alert('saved')
+    if(user){
+      const userforUpdate = {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(user)
+      };
+      fetch('https://english-joaz.onrender.com/user', userforUpdate)
+      .then((response)=>response.json())
+      .then((data)=> console.log(data))
+      .catch((err)=> alert(err))
+      
+    }
+    else navigate('/login')
   }
   const indexWord = text?.text?.indexOf('Meaning')
   const indexMeaning = text?.text?.indexOf('Sentences:')
@@ -40,9 +58,9 @@ export const WordCard = () => {
     <h4 className='text-xl font-light'>{sentence1}</h4>
     <h4 className='text-xl font-light'>{sentence2}</h4>
     <h4 className='text-xl font-light'>{sentence3}</h4>
-    {/* <div className="bg-[#fa2f72] text-white font-bold w-36 py-3 rounded-md text-center mx-auto text-[#0c0c0c] hover:shadow-xl shadow-indigo-500/40">
+    <div className="bg-[#fa2f72] text-white font-bold w-36 py-3 rounded-md text-center mx-auto text-[#0c0c0c] hover:shadow-xl shadow-indigo-500/40">
     <button className='bg-'onClick={handleSave}>Save word</button>
-    </div> */}
+    </div>
  </div>
   )
 }

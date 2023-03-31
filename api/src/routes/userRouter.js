@@ -21,6 +21,7 @@ userRouter.post('/', async(req, res)=>{
       const newUser = await createNewUser(email)
       return res.status(200).send(newUser)
     }
+    
     res.status(200).send(user)
   } catch (error) {
     res.status(400).send(error.message)
