@@ -10,7 +10,6 @@ wordRouter.get('/', async(req, res) => {
     const { words } = req.query
     if(words){
       const result = await getWordsSaved(words)
-      console.log(result)
       return res.status(200).send(result)
     }
     else { 
@@ -21,8 +20,8 @@ wordRouter.get('/', async(req, res) => {
         const result = await createNewWord(text,date)
         return res.status(200).send(result)
       }
+      res.status(200).send(result)
     }
-    res.status(200).send(result)
   } catch (error) {
     res.status(400).send(error.message)
   }
