@@ -13,3 +13,12 @@ export const createNewWord = async (text, date) => {
     return error
   }
   }
+
+  export const getWordsSaved = async (words) => {
+    try {
+      const wordsSaved = await Word.find({date: {$in: words}})
+      return wordsSaved
+    } catch (error) {
+      return error
+    }
+  }

@@ -5,15 +5,29 @@ import { useNavigate} from 'react-router-dom';
 
 export const WordCard = () => {
   const [text, setText] = useState({})
+  const [wordSaved , setWordSaved] = useState('Save word')
   const navigate = useNavigate()
-  const {user} = useUserAuth()
+  const {user, userInDB} = useUserAuth()
 
   useEffect(()=>{
     fetch('https://english-joaz.onrender.com/word')
     .then((response)=>response.json())
     .then((data)=> setText(data[0]))
     .catch((err)=> console.log(err))
+
   },[])
+
+  useEffect(()=>{
+    if(userInDB){
+      const date = new Date().toDateString() //the word is saved in the data base with the name of the current day
+      const todaysWord = userInDB?.words
+      const lastWordSavedIndex = todaysWord?.length
+      if(todaysWord && todaysWord[lastWordSavedIndex -1] == date){
+        setWordSaved('saved')
+      }
+      else {setWordSaved('Save word')}
+    }
+  }, [userInDB, user])
   
   while(!text.text){
     return (
@@ -58,8 +72,8 @@ export const WordCard = () => {
     <h4 className='text-xl font-light'>{sentence1}</h4>
     <h4 className='text-xl font-light'>{sentence2}</h4>
     <h4 className='text-xl font-light'>{sentence3}</h4>
-    <div className="bg-[#fa2f72] text-white font-bold w-36 py-3 mt-3 rounded-md text-center mx-auto text-[#0c0c0c] hover:shadow-xl shadow-indigo-500/40">
-    <button className='bg-'onClick={handleSave}>Save word</button>
+    <div className="bg-[#fa2f72] text-white font-bold w-36 py-3 mt-3 rounded-md text-center mx-auto text-[#0c0c0c]">
+    <button disabled={wordSaved == 'saved'} onClick={handleSave}>{wordSaved}</button>
     </div>
  </div>
   )
