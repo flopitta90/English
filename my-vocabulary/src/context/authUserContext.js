@@ -14,6 +14,7 @@ const userAuthContext = createContext();
 export function UserAuthContextProvider({ children }) {
   const [user, setUser] = useState({});
   const [userInDB, setUserInDB] = useState({})
+  const [words, setWords] = useState([])
   function logIn(email, password) {
     return signInWithEmailAndPassword(auth, email, password);
   }
@@ -52,10 +53,19 @@ export function UserAuthContextProvider({ children }) {
     } else setUserInDB({})
   },[user])
 
+  useEffect(()=>{
+    if(userInDB?.words){
+      setWords(userInDB.words)
+    }else {
+      setWords([])
+    }
+    
+  }, [userInDB])
+
 
   return (
     <userAuthContext.Provider
-      value={{ user, logIn, signUp, logOut, googleSignIn, userInDB }}
+      value={{ user, logIn, signUp, logOut, googleSignIn, userInDB, words}}
     >
       {children}
     </userAuthContext.Provider>

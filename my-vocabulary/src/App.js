@@ -4,6 +4,7 @@ import { SignIn } from './components/SignIn';
 import { Home } from './components/Home';
 import { Logout } from './components/Logout';
 import { UserAuthContextProvider } from './context/authUserContext.js';
+import { MyWords } from './components/MyWords';
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
           <Route path='/' element={<Home/>}/>
           <Route path='/signup' element={<SignUp/>}/>
           <Route path='/login' element={<Logout/>}/>
+          <Route path='/mywords' element={<MyWords/>}/>
         </Routes>  
        </UserAuthContextProvider>
     </div>
