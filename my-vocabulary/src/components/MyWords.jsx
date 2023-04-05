@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react'
 import {useUserAuth} from '../context/authUserContext.js';
 import { WordContainer } from './WordContainer.jsx';
 import { useNavigate } from 'react-router-dom'
+import logoGif from '../images/logoturning.gif'
 
 export const MyWords = () => {
   const navigate = useNavigate()
@@ -20,6 +21,14 @@ export const MyWords = () => {
   
   const handleBack = ()=>{
     navigate('/')
+  }
+
+  while(!words){
+    return (
+      <div className='bg-black w-1/2 min-h-56'>
+        <img src={logoGif}/>
+      </div>
+    )
   }
   
   return (
