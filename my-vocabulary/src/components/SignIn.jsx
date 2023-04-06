@@ -6,7 +6,7 @@ import { useUserAuth } from '../context/authUserContext.js';
 
 
 export const SignIn = () => {
-  const { logOut, user } = useUserAuth()
+  const { logOut, user, userInDB } = useUserAuth()
  
 
   const navigate = useNavigate()
@@ -34,7 +34,9 @@ export const SignIn = () => {
   return (
       user?
       <div className='flex p-3 space-x-2 justify-evenly md:justify-end'>
-        <button className='p-1 bg-[#f1f1f1] rounded-md w-28 hover:shadow-xl shadow-indigo-500/40' onClick={handleMyWords}>My words</button>
+       {userInDB? <button className='p-1 bg-[#f1f1f1] rounded-md w-28 hover:shadow-xl shadow-indigo-500/40' onClick={handleMyWords}>My words</button> :
+       null
+       }
         <button className='p-1 bg-[#f1f1f1] rounded-md w-28 hover:shadow-xl shadow-indigo-500/40' onClick={handleLogout}>Log out</button>
       </div>
       : <div className='flex p-3 space-x-2 justify-evenly md:justify-end'>

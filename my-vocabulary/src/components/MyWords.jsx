@@ -23,7 +23,7 @@ export const MyWords = () => {
     navigate('/')
   }
 
-  while(!words){
+  while(!words.length){
     return (
       <div className='bg-black w-1/2 min-h-56'>
         <img src={logoGif}/>
