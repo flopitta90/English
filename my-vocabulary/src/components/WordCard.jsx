@@ -49,7 +49,7 @@ export const WordCard = () => {
       .then((response)=>response.json())
       .then((data)=> alert('saved!'))
       .catch((err)=> alert(err))
-      
+      .finally(()=> setWordSaved('saved'))
     }
     else navigate('/login')
   }
