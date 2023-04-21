@@ -3,7 +3,7 @@ import {useUserAuth} from '../context/authUserContext.js';
 import { WordContainer } from './WordContainer.jsx';
 import { useNavigate } from 'react-router-dom'
 import logoGif from '../images/logoturning.gif'
-import { parseGPT } from '../functions/parseGPT.js';
+import { parseGPTResponse } from '../functions/parseGPT.js';
 
 export const MyWords = () => {
   const navigate = useNavigate()
@@ -37,7 +37,7 @@ export const MyWords = () => {
        <button onClick={handleBack} className='bg-[#fff] p-3 rounded-md m-3'>Go back</button>
       {wordsSaved.length?
         wordsSaved.map(text => {
-          const {word,meaning,sentence1,sentence2,sentence3} = parseGPT(text)
+          const {word,meaning,sentence1,sentence2,sentence3} = parseGPTResponse(text)
           return <WordContainer key={word} word={word} meaning={meaning} sentence1={sentence1} sentence2={sentence2} sentence3={sentence3}></WordContainer>
         }) : null}
     </div>
