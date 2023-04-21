@@ -1,4 +1,4 @@
-export const parseGPT = (text) => {
+export const parseGPTResponse = (text) => {
   const indexWord = text?.text?.indexOf('Meaning')
   const indexMeaning = text?.text?.indexOf('Sentences:')
   const indexSentences = text?.text?.indexOf('1')
