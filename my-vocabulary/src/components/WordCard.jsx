@@ -54,7 +54,6 @@ export const WordCard = () => {
     }
     else navigate('/login')
   }
-  console.log(text)
   const {word,meaning,sentence1,sentence2,sentence3} = parseGPT(text)
 
   return (
