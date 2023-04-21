@@ -1,5 +1,4 @@
 import { parseGPT } from "../parseGPT";
-// import {describe, expect, test} from '@jest/globals';
 
 
 describe('Parse the information coming from GPT API',()=>{
