@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import logoGif from '../images/logoturning.gif'
 import {useUserAuth} from '../context/authUserContext.js';
 import { useNavigate} from 'react-router-dom';
-import { parseGPT } from '../functions/parseGPT';
+import { parseGPTResponse } from '../functions/parseGPT';
 
 export const WordCard = () => {
   const [text, setText] = useState({})
@@ -54,7 +54,7 @@ export const WordCard = () => {
     }
     else navigate('/login')
   }
-  const {word,meaning,sentence1,sentence2,sentence3} = parseGPT(text)
+  const {word,meaning,sentence1,sentence2,sentence3} = parseGPTResponse(text)
 
   return (
     <div className='bg-[#f1f1f1] rounded-xl p-10 drop-shadow-xl w-[95%] md:w-[50%]'>
