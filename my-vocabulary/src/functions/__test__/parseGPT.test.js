@@ -1,4 +1,4 @@
-import { parseGPT } from "../parseGPT";
+import { parseGPTResponse } from "../parseGPT";
 
 
 describe('Parse the information coming from GPT API',()=>{
