@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import logoGif from '../images/logoturning.gif'
 import {useUserAuth} from '../context/authUserContext.js';
 import { useNavigate} from 'react-router-dom';
+import { parseGPT } from '../functions/parseGPT';
 
 export const WordCard = () => {
   const [text, setText] = useState({})
@@ -53,17 +54,9 @@ export const WordCard = () => {
     }
     else navigate('/login')
   }
-  const indexWord = text?.text?.indexOf('Meaning')
-  const indexMeaning = text?.text?.indexOf('Sentences:')
-  const indexSentences = text?.text?.indexOf('1')
-  const indexSentence1 = text?.text?.indexOf('2')
-  const indexSentence2 = text?.text?.indexOf('3')
+  console.log(text)
+  const {word,meaning,sentence1,sentence2,sentence3} = parseGPT(text)
 
-  const word = text?.text?.slice(7,indexWord)
-  const meaning = text?.text?.slice(indexWord,indexMeaning)
-  const sentence1 = text?.text?.slice(indexSentences,indexSentence1)
-  const sentence2 = text?.text?.slice(indexSentence1,indexSentence2)
-  const sentence3 = text?.text?.slice(indexSentence2)
   return (
     <div className='bg-[#f1f1f1] rounded-xl p-10 drop-shadow-xl w-[95%] md:w-[50%]'>
     <h4 className='text-2xl font-bold flex align-center justify-center align-center'>{word}</h4>

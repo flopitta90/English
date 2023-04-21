@@ -3,6 +3,7 @@ import {useUserAuth} from '../context/authUserContext.js';
 import { WordContainer } from './WordContainer.jsx';
 import { useNavigate } from 'react-router-dom'
 import logoGif from '../images/logoturning.gif'
+import { parseGPT } from '../functions/parseGPT.js';
 
 export const MyWords = () => {
   const navigate = useNavigate()
@@ -36,17 +37,7 @@ export const MyWords = () => {
        <button onClick={handleBack} className='bg-[#fff] p-3 rounded-md m-3'>Go back</button>
       {wordsSaved.length?
         wordsSaved.map(text => {
-          const indexWord = text?.text?.indexOf('Meaning')
-          const indexMeaning = text?.text?.indexOf('Sentences:')
-          const indexSentences = text?.text?.indexOf('1')
-          const indexSentence1 = text?.text?.indexOf('2')
-          const indexSentence2 = text?.text?.indexOf('3')
-        
-          const word = text?.text?.slice(7,indexWord)
-          const meaning = text?.text?.slice(indexWord,indexMeaning)
-          const sentence1 = text?.text?.slice(indexSentences,indexSentence1)
-          const sentence2 = text?.text?.slice(indexSentence1,indexSentence2)
-          const sentence3 = text?.text?.slice(indexSentence2)
+          const {word,meaning,sentence1,sentence2,sentence3} = parseGPT(text)
           return <WordContainer key={word} word={word} meaning={meaning} sentence1={sentence1} sentence2={sentence2} sentence3={sentence3}></WordContainer>
         }) : null}
     </div>
